@@ -19,10 +19,10 @@ public class WebFunctionApplication {
         SpringApplication.run(WebFunctionApplication.class, args);
     }
 
-	@Autowired
+    @Autowired
     private StudentService studentService;
 
-	@Bean
+    @Bean
     public Function<Student, Student> createStudent() {
         return student -> {
             try {
@@ -37,7 +37,7 @@ public class WebFunctionApplication {
     @Bean
     public Function<Integer, Student> getStudent() {
 
-		try {
+        try {
             return studentId -> studentService.getStudent(studentId);
         } catch (HttpClientErrorException e) {
             e.printStackTrace();
@@ -45,14 +45,14 @@ public class WebFunctionApplication {
         }
     }
 
-	@Bean
+    @Bean
     public Supplier<List<Student>> listStudents() {
 
-		try {
-			return () -> studentService.listStudents();
-		} catch (HttpClientErrorException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+        try {
+            return () -> studentService.listStudents();
+        } catch (HttpClientErrorException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
